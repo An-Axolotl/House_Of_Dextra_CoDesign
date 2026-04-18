@@ -2,7 +2,7 @@
 
 ![House of Dextra](header.gif)
 
-CoDesign-InHand is the unified repository for the dexterous hand co-design stack used in *House of Dextra: Cross-Embodied Co-Design for Dexterous Hands*.
+House of Dextra is the unified repository for the dexterous hand co-design stack used in *House of Dextra: Cross-Embodied Co-Design for Dexterous Hands*.
 
 At a high level, the project combines:
 - morphology generation for candidate hand designs,
