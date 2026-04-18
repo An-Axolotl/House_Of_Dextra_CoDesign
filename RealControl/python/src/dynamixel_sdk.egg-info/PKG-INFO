@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: dynamixel_sdk
+Version: 3.8.4
+Summary: Dynamixel SDK 3. python package
+Home-page: https://github.com/ROBOTIS-GIT/DynamixelSDK
+Author: Leon Jung, Wonho Yun
+Author-email: rwjung@robotis.com, ywh@robotis.com
+License: Apache 2.0
+License-File: LICENSE.txt
+Requires-Dist: pyserial
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+Description is available at http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/overview/

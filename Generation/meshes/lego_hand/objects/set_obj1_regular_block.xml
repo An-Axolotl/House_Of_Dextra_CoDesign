@@ -1,0 +1,33 @@
+<mujoco model="set_obj1_regular_block">
+  <!-- angles in radians; set a mesh base dir if you like via compiler meshdir/assetdir -->
+  <compiler angle="radian"/>
+
+  <asset>
+    <!-- Visual mesh (non-colliding) -->
+    <mesh name="obj_visual"
+          file="meshes/set2/set_obj1_regular_block.obj"
+          scale="0.03 0.03 0.03"/>
+    <!-- Collision mesh (decomposed / convex parts) -->
+    <mesh name="obj_collision"
+          file="meshes/set2/set_obj1_regular_block_0decompose.obj"
+          scale="0.03 0.03 0.03"/>
+  </asset>
+
+  <worldbody>
+    <body name="set_obj1_regular_block" pos="0 0 2">
+      <!-- Colliding geom drives mass/inertia via density -->
+      <geom name="object_collision" 
+            type="mesh" 
+            mesh="obj_collision" 
+            density="1000" 
+            contype="1" conaffinity="1"
+            rgba="1 1 1 0"/>             <!-- hidden -->
+
+      <!-- Visual-only geom -->
+      <geom name="object_visual"
+            type="mesh" mesh="obj_visual"
+            contype="0" conaffinity="0"
+            rgba="0.8 0.8 0.8 1" group="1"/>
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="hand_scene">
+  <compiler angle="radian" meshdir="./" inertiagrouprange="1 1" />
+  <option integrator="implicitfast" cone="elliptic" impratio="100" timestep="0.002" gravity="0 0 -9.81">
+    <flag warmstart="enable" nativeccd="enable" multiccd="enable" />
+  </option>
+  <asset>
+    <!-- visual -->
+     <!-- <mesh name="palm_vis" file="palm_hull.obj"/> -->
+    <mesh name="palm_vis" file="../../sets/test_hands/meshes/hand_f1_10_f2_20_f3_320_f4_f5_palm_part0.obj"/>
+
+    <!-- collisions -->
+     <!-- <mesh name="palm_part0" file="palm_hull.obj"/> -->
+     <mesh name="palm_part0" file="../../sets/test_hands/meshes/hand_f1_10_f2_20_f3_320_f4_f5_palm_part0.obj"/>
+
+    <model name="finger_model_1" file="finger1.xml" />
+    <model name="finger_model_2" file="finger2.xml" />
+    <model name="finger_model_3" file="finger_random.xml" />
+    <model name="finger_model_4" file="finger_random.xml" />
+    <model name="finger_model_5" file="finger_random.xml" />
+    <texture name="grid" type="2d" builtin="checker" rgb1=".1 .2 .3" rgb2=".2 .3 .4" width="300" height="300" mark="none" />
+    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2" />
+
+    <mesh name="obj1_visual" file="objects/meshes/set2/set_obj1_regular_block.obj" scale="0.01 0.01 0.01" />
+    <mesh name="obj1_collision" file="objects/meshes/set2/set_obj1_regular_block_0decompose.obj" scale="0.01 0.01 0.01" />
+    <material name="cube_mat" rgba="0.8 0.4 0.2 1" shininess="0.1" reflectance="0.2" />
+  </asset>
+  <default>
+    <geom solimp="0.999 0.999 0.001 0.0001 1" solref="0.0001 1" friction=".2" condim="6" margin="0.002" />
+    <joint damping="0.03" frictionloss="0.001" armature="0.0015" />
+  </default>
+  <visual>
+    <global azimuth="120" elevation="-20" />
+  </visual>
+  <worldbody>
+    <light name="main_light" pos="0 0 4" dir="0 0 -1" diffuse="1 1 1" specular="0.5 0.5 0.5" />
+    <geom name="floor" type="plane" pos="0 0 0" size="10 10 0.1" material="grid" />
+    <body name="hand" pos="0 0 0.5" euler="3.1415926 0 0">
+      <body name="palm">
+        <geom name="palm_geom_0" type="mesh" mesh="palm_part0" group="1" rgba="1 1 1 1" />
+        <geom name="palm_vis_geom" type="mesh" mesh="palm_vis" group="0" contype="0" conaffinity="0" />
+      </body>
+      <frame pos="0.027172 0.021566 0.082200" quat="0.705927 0.000000 0.000000 -0.708284">
+    <attach model="finger_model_1" body="finger_root" prefix="f1_"/>
+  </frame>
+  <frame pos="-0.028274 0.024031 0.082200" quat="0.992820 0.000000 0.000000 0.119621">
+    <attach model="finger_model_2" body="finger_root" prefix="f2_"/>
+  </frame>
+  <frame pos="0.011818 -0.028858 0.082200" quat="0.185011 0.000000 0.000000 0.982736">
+    <attach model="finger_model_3" body="finger_root" prefix="f3_"/>
+  </frame>
+    </body>
+
+    <body name="obj1" pos="-0.0 -0.0 0.54">
+      <freejoint name="obj1_free" />
+      <!-- <geom name="obj1_sphere" type="sphere" size="0.031" group="1" mass="0.1" friction="0.3 0.01 0.0005" material="cube_mat" /> -->
+       <geom name="obj1_cube" type="box" size="0.031 0.031 0.031" group="1" mass="0.1" friction="0.3 0.01 0.0005" material="cube_mat" />
+    </body>
+    <camera name="fixed" pos="0 -3 2" xyaxes="1 0 0 0 1 2" />
+  </worldbody>
+</mujoco>

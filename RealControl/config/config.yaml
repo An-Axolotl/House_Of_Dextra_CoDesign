@@ -1,0 +1,155 @@
+# Default configuration for robotic hand control
+
+# Policy Configuration
+policy:
+  # default_path: "agents/small_cube_no_scaling/first_success.pt"
+
+  # default_path: "agents/small_cube_no_scaling/40min_fs1.pt"
+  # default_path: "agents/small_cube_no_scaling/highest_rew_fs1_policy.pt"
+  # default_path: "agents/small_cube_no_scaling/max_trained_fs1.pt"
+
+  # default_path: "agents/first_generalized.pt"
+
+  # default_path: "agents/small_cube_best4.pt"
+  # default_path: "agents/best_small_cube.pt"
+  default_path: "agents/last_small_cube.pt"
+
+
+# Control Parameters
+control:
+  act_moving_avg: 0.041666666666666664  # 1.0 / 24.0
+  control_hz: 30.0
+
+# Default Joint Positions (Isaac order)
+joint_positions:
+  # set for small cube
+  # default_isaac_order: [
+  #       0.3, 0.477, 0.0, 0.0, 0.0,
+  #       1.0, 0.748, 0.0, 0.0, 0.487,
+  #       1.57, 1.32, 1.57, 1.57, 1.46,
+  #       0.5, 0.726, 0.5, 0.5, 1.16
+  #   ]
+
+  # ????
+  # default_isaac_order: [
+  #   0.3, 0.477, 0.0, 0.0, 0.0,
+  #   1.0, 0.487, 0.0, 0.0, 0.487,
+  #   1.57, 1.32, 1.57, 1.57, 1.46,
+  #   0.5, 0.726, 0.0, 0.0, 1.16
+  # ]
+
+  # generalized for scaled cubes
+  # default_isaac_order: [
+  #   0.3, 0.477, 0.0, 0.0, 0.0,
+  #   1.0, 0.534, 0.0, 0.0, 0.487,
+  #   1.57, 1.35, 1.57, 1.57, 1.46,
+  #   0.5, 1.05, 0.5, 0.5, 1.16
+  # ]
+
+  # trained for modded as well as small cubes
+  default_isaac_order: [
+    0.3, 0.477, 0.0, 0.0, 0.0,
+    1.0, 0.748, 0.0, 0.0, 0.487,
+    1.57, 1.32, 1.57, 1.57, 1.46,
+    0.5, 1.42, 0.5, 0.5, 1.16
+  ]
+
+
+# Dynamixel Hardware Configuration
+dynamixel:
+  # Communication
+  device_name: "/dev/cu.usbserial-FT8ISFXP"
+  baudrate: 3000000
+  protocol_version: 2.0
+  
+  # Motor IDs
+  motor_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  palm_ids: [1, 5, 9, 13, 17]
+  
+  # Control table addresses
+  addresses:
+    torque_enable: 64
+    goal_position: 116
+    present_position: 132
+    min_position_limit: 52
+    max_position_limit: 48
+    profile_velocity: 112
+    profile_acceleration: 108
+    position_p_gain: 84
+    position_i_gain: 82
+    position_d_gain: 80
+    firmware_version: 6
+    return_delay_time: 9
+  
+  # Data lengths
+  data_lengths:
+    goal_position: 4
+    present_position: 4
+  
+  # Constants
+  torque_enable_value: 1
+  torque_disable_value: 0
+  invalid_u32: 0xFFFFFFFF
+  
+  # Motor configuration
+  profile_velocity: 300
+  profile_acceleration: 100
+
+# Per-motor limit offsets [tight_lo_offset, tight_hi_offset]
+limit_offsets: [
+  [548, -641],   # ID 1
+  [58, -298],    # ID 2
+  [58, -248],    # ID 3
+  [58, -268],    # ID 4
+  [568, -568],   # ID 5
+  [74, -252],    # ID 6
+  [68, -248],    # ID 7
+  [48, -278],    # ID 8
+  [568, -569],   # ID 9
+  [84, -272],    # ID 10
+  [58, -248],    # ID 11
+  [52, -270],    # ID 12
+  [569, -569],   # ID 13
+  [64, -252],    # ID 14
+  [58, -248],    # ID 15
+  [0, -266],     # ID 16
+  [374, -569],   # ID 17
+  [72, 0],       # ID 18
+  [0, -261],     # ID 19
+  [98, -328]     # ID 20
+]
+
+# PID Gains [P, I, D] for each motor
+pid_gains: [
+  [1200, 100, 1500],  # ID 1
+  [1200, 0, 1500],    # ID 2
+  [2500, 0, 3000],    # ID 3
+  [2000, 0, 2000],    # ID 4
+  [900, 180, 1500],   # ID 5
+  [1200, 0, 2000],    # ID 6
+  [2500, 0, 6000],    # ID 7
+  [2000, 0, 2000],    # ID 8
+  [900, 0, 1500],     # ID 9
+  [2500, 100, 6000],  # ID 10
+  [2000, 10, 2500],   # ID 11
+  [2000, 0, 2000],    # ID 12
+  [1500, 0, 1500],    # ID 13
+  [2500, 100, 6000],  # ID 14
+  [2000, 10, 2500],   # ID 15
+  [2000, 0, 2000],    # ID 16
+  [1500, 0, 1500],    # ID 17
+  [2500, 100, 6000],  # ID 18
+  [2000, 0, 2500],    # ID 19
+  [2000, 0, 2000]     # ID 20
+]
+
+# Simulation Parameters
+simulation:
+  # Joint ranges for simulation
+  palm_range: [-0.698, 0.698]
+  other_range: [0.0, 1.5708]
+
+# Observation Configuration
+observation:
+  history_frames: 3
+  object_one_hot: [1, 0, 0, 0]

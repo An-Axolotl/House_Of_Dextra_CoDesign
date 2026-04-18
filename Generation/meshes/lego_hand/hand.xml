@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="hand_scene">
+  <compiler angle="radian" meshdir="./" inertiagrouprange="1 1" />
+  <option integrator="implicitfast" cone="elliptic" impratio="100" timestep="0.002">
+    <flag warmstart="enable" nativeccd="enable" multiccd="enable" />
+  </option>
+  <asset>
+    <!-- visual -->
+    <mesh name="palm_vis" file="robot_meshes/visual/palm_vis.obj"/>
+
+    <!-- collisions -->
+     <!-- <mesh name="palm_part0" file="robot_meshes/palm_part0.obj"/> -->
+     <!-- <mesh name="palm_part1" file="robot_meshes/palm_part1.obj"/> -->
+     <!-- <mesh name="palm_part2" file="robot_meshes/palm_part2.obj"/> -->
+     <!-- <mesh name="palm_part3" file="robot_meshes/palm_part3.obj"/> -->
+     <!-- <mesh name="palm_part4" file="robot_meshes/palm_part4.obj"/> -->
+     <!-- <mesh name="palm_part5" file="robot_meshes/palm_part5.obj"/> -->
+     <!-- <mesh name="palm_part6" file="robot_meshes/palm_part6.obj"/> -->
+     <!-- <mesh name="palm_part7" file="robot_meshes/palm_part7.obj"/> -->
+     <!-- <mesh name="palm_part8" file="robot_meshes/palm_part8.obj"/> -->
+     <!-- <mesh name="palm_part9" file="robot_meshes/palm_part9.obj"/> -->
+     <!-- <mesh name="palm_part10" file="robot_meshes/palm_part10.obj"/> -->
+     <!-- <mesh name="palm_part11" file="robot_meshes/palm_part11.obj"/> -->
+      <mesh name="palm_part0" file="robot_meshes/visual/palm_vis.obj"/>
+
+    <model name="finger_model_1" file="finger_random.xml" />
+    <model name="finger_model_2" file="finger_random.xml" />
+    <model name="finger_model_3" file="finger_random.xml" />
+    <model name="finger_model_4" file="finger_random.xml" />
+    <model name="finger_model_5" file="finger_random.xml" />
+    <texture name="grid" type="2d" builtin="checker" rgb1=".1 .2 .3" rgb2=".2 .3 .4" width="300" height="300" mark="none" />
+    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2" />
+  </asset>
+  <default>
+    <geom solimp="0.999 0.999 0.001 0.0001 1" solref="0.0001 1" friction=".2" condim="6" margin="0.002" />
+    <joint damping="0.03" frictionloss="0.001" armature="0.0015" />
+  </default>
+  <visual>
+    <global azimuth="120" elevation="-20" />
+  </visual>
+  <worldbody>
+    <light name="main_light" pos="0 0 4" dir="0 0 -1" diffuse="1 1 1" specular="0.5 0.5 0.5" />
+    <geom name="floor" type="plane" pos="0 0 0" size="10 10 0.1" material="grid" />
+    <body name="hand" pos="0 0 0.5" euler="3.1415926 0 0">
+      <body name="palm">
+        <geom name="palm_geom_0" type="mesh" mesh="palm_part0" group="1" rgba="1 1 1 1" />
+        <!-- <geom name="palm_geom_1" type="mesh" mesh="palm_part1" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_2" type="mesh" mesh="palm_part2" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_3" type="mesh" mesh="palm_part3" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_4" type="mesh" mesh="palm_part4" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_5" type="mesh" mesh="palm_part5" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_6" type="mesh" mesh="palm_part6" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_7" type="mesh" mesh="palm_part7" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_8" type="mesh" mesh="palm_part8" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_9" type="mesh" mesh="palm_part9" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_10" type="mesh" mesh="palm_part10" group="1" rgba="1 1 1 1" /> -->
+        <!-- <geom name="palm_geom_11" type="mesh" mesh="palm_part11" group="1" rgba="1 1 1 1" /> -->
+        <geom name="palm_vis_geom" type="mesh" mesh="palm_vis" group="0" contype="0" conaffinity="0" />
+      </body>
+      <frame pos="0 0 0">
+        <attach model="finger_model_1" body="finger_root" prefix="f1_" />
+      </frame>
+      <frame pos="0.023811 0.025036 0.000000" quat="0.961255 0.000000 0.000000 -0.275660">
+          <attach model="finger_model_2" body="finger_root" prefix="f2_"/>
+      </frame>
+      <frame pos="0.042166 0.030240 0.000000" quat="0.763781 0.000000 0.000000 -0.645475">
+          <attach model="finger_model_3" body="finger_root" prefix="f3_"/>
+      </frame>
+      <frame pos="0.051952 0.009645 0.000000" quat="0.578885 0.000000 0.000000 -0.815409">
+          <attach model="finger_model_4" body="finger_root" prefix="f4_"/>
+      </frame>
+      <frame pos="0.059447 -0.006788 0.000000" quat="0.240329 0.000000 0.000000 -0.970691">
+          <attach model="finger_model_5" body="finger_root" prefix="f5_"/>
+      </frame>
+    </body>
+    <camera name="fixed" pos="0 -3 2" xyaxes="1 0 0 0 1 2" />
+  </worldbody>
+</mujoco>

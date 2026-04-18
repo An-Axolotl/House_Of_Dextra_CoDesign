@@ -1,0 +1,30 @@
+# CoDesign-InHand
+
+CoDesign-InHand is the unified repository for the dexterous hand co-design stack used in *House of Dextra: Cross-Embodied Co-Design for Dexterous Hands*.
+
+At a high level, the project combines:
+
+- morphology generation for candidate hand designs,
+- simulation-based policy evaluation and search,
+- and real-world control/deployment tooling.
+
+For full method details, experiment setup, and results, see https://openreview.net/pdf?id=k8ovuXEQQu.
+
+## Repository Map
+
+- [`Main/`](Main/): graph-heuristic search loop and experiment orchestration.
+- [`IsaacLab/`](IsaacLab/): simulation environments, policies, and task integration.
+- [`Generation/`](Generation/): hand asset generation and conversion pipeline.
+- [`RealControl/`](RealControl/): real hardware control and deployment utilities.
+
+## Read This Next
+
+The top-level README is intentionally high-level. Use the setup guide and directory READMEs for workflow-specific instructions:
+
+- [`SETUP.md`](SETUP.md)
+- [`Main/README.md`](Main/README.md)
+- [`IsaacLab/README.md`](IsaacLab/README.md)
+- [`Generation/README.md`](Generation/README.md)
+- [`RealControl/README.md`](RealControl/README.md)
+
+Setup, prerequisites, and Isaac Sim installation steps are documented in [`SETUP.md`](SETUP.md).

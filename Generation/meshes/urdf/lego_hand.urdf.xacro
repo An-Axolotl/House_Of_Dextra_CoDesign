@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lego_hand">
+  <xacro:include filename="lego_finger.urdf.xacro"/>
+  <link name="palm">
+    <visual>
+      <geometry>
+        <mesh filename="robot_meshes/visual/palm_vis.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="robot_meshes/palm1_part0.obj"/>
+      </geometry>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="robot_meshes/palm1_part1.obj"/>
+      </geometry>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="robot_meshes/palm2_part0.obj"/>
+      </geometry>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="robot_meshes/palm2_part1.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <xacro:finger prefix="f1_" parent="palm">
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+  </xacro:finger>
+  <xacro:finger prefix="f2_" parent="palm">
+    <origin xyz="0.025080 0.024835 0.000000" rpy="0.000000 0.000000 -0.558867"/>
+  </xacro:finger>
+  <xacro:finger prefix="f3_" parent="palm">
+    <origin xyz="0.041631 0.031106 0.000000" rpy="0.000000 0.000000 -1.403303"/>
+  </xacro:finger>
+  <xacro:finger prefix="f4_" parent="palm">
+    <origin xyz="0.052468 0.010662 0.000000" rpy="0.000000 0.000000 -1.907016"/>
+  </xacro:finger>
+  <xacro:finger prefix="f5_" parent="palm">
+    <origin xyz="0.059325 -0.005386 0.000000" rpy="0.000000 0.000000 -2.656200"/>
+  </xacro:finger>
+</robot>

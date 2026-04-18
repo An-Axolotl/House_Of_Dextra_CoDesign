@@ -1,0 +1,121 @@
+<!-- finger.xml -->
+<mujoco model="finger">
+  <compiler angle="radian"/>
+  <asset>
+    <!-- Collision Meshes -->
+    <mesh name="finger1_palm_servo" file="robot_meshes_fixed/finger1_palm_servo.obj"/>
+    <mesh name="finger1_base" file="robot_meshes_fixed/finger1_base.obj"/>
+    <mesh name="finger1_bg" file="robot_meshes_fixed/finger1_bg.obj"/>
+    <mesh name="finger1_grammar1" file="robot_meshes_fixed/finger1_grammar1.obj"/>
+    <mesh name="finger1_middle" file="robot_meshes_fixed/finger1_middle.obj"/>
+    <mesh name="finger1_mg" file="robot_meshes_fixed/finger1_mg.obj"/>
+    <mesh name="finger1_grammar2" file="robot_meshes_fixed/finger1_grammar2.obj"/>
+    <mesh name="finger1_end" file="robot_meshes_fixed/finger1_end.obj"/>
+    <mesh name="finger1_eg" file="robot_meshes_fixed/finger1_eg.obj"/>
+    <mesh name="finger1_tip" file="robot_meshes_fixed/finger1_tip2.obj"/>
+
+    <!-- Visual Meshes -->
+    <mesh name="finger1_palm_servo_vis" file="robot_meshes_fixed/vis_meshes/finger1_palm_servo_vis.obj"/>
+    <mesh name="finger1_base_vis" file="robot_meshes_fixed/vis_meshes/finger1_base_vis.obj"/>
+    <mesh name="finger1_bg_vis" file="robot_meshes_fixed/vis_meshes/finger1_bg_vis.obj"/>
+    <mesh name="finger1_grammar1_vis" file="robot_meshes_fixed/vis_meshes/finger1_grammar1_vis.obj"/>
+    <mesh name="finger1_middle_vis" file="robot_meshes_fixed/vis_meshes/finger1_middle_vis.obj"/>
+    <mesh name="finger1_mg_vis" file="robot_meshes_fixed/vis_meshes/finger1_mg_vis.obj"/>
+    <mesh name="finger1_grammar2_vis" file="robot_meshes_fixed/vis_meshes/finger1_grammar2_vis.obj"/>
+    <mesh name="finger1_end_vis" file="robot_meshes_fixed/vis_meshes/finger1_end_vis.obj"/>
+    <mesh name="finger1_eg_vis" file="robot_meshes_fixed/vis_meshes/finger1_eg_vis.obj"/>
+    <mesh name="finger1_tip_vis" file="robot_meshes_fixed/vis_meshes/finger1_tip2_vis.obj"/>
+  </asset>
+
+  <default>
+      <geom solimp="0.999 0.999 0.001 0.0001 1" solref="0.0001 1" friction=".2" condim="6" margin="0.002"/>
+      <joint damping="0.01" frictionloss="0.001" armature="0.0015"/>
+      <default class="servo">
+        <position kp="0.5" kv="0.01"/>
+        <!-- <default class="tip"><geom friction="3.0 0.05 0.01"/></default> -->
+         <default class="tip"><geom friction="0.2 0.002 0.0001"/></default>
+        <default class="hand"><geom friction="0.8 0.01 0.001"/></default>
+    </default>
+
+  </default>
+
+  
+  <contact>
+    <exclude body1="finger1_base"         body2="palm"/>
+    <exclude body1="palm"         body2="finger1_base"/>
+    <!-- stop all intra‑finger collisions -->
+    <!-- but allow inter-finger collisions -->
+    <exclude body1="finger_root"         body2="finger1_palm_servo"/>
+    <exclude body1="finger_root"         body2="finger1_base"/>
+    <exclude body1="finger_root"         body2="finger1_bg"/>
+    <exclude body1="finger_root"         body2="finger1_middle"/>
+    <exclude body1="finger_root"         body2="finger1_end"/>
+    <exclude body1="finger1_palm_servo"  body2="finger1_base"/>
+    <exclude body1="finger1_palm_servo"  body2="finger1_bg"/>
+    <exclude body1="finger1_palm_servo"  body2="finger1_middle"/>
+    <exclude body1="finger1_palm_servo"  body2="finger1_end"/>
+    <exclude body1="finger1_base"        body2="finger1_bg"/>
+    <exclude body1="finger1_base"        body2="finger1_middle"/>
+    <exclude body1="finger1_base"        body2="finger1_end"/>
+    <exclude body1="finger1_bg"          body2="finger1_middle"/>
+    <exclude body1="finger1_bg"          body2="finger1_end"/>
+    <exclude body1="finger1_middle"      body2="finger1_end"/>
+  </contact>
+
+  <worldbody>
+    <body name="finger_root" pos="0 0 0">
+      <body name="finger1_palm_servo" pos="0 0 0">
+            <geom name="finger1_palm_servo_geom" type="mesh" mesh="finger1_palm_servo" group="1" rgba="1 1 1 1"/>
+            <geom name="finger1_palm_servo_vis_geom" type="mesh" mesh="finger1_palm_servo_vis" group="0" contype="0" conaffinity="0"/>
+            <body name="finger1_base" pos="0 0 0">
+                <joint name="finger1_palm_joint" type="hinge" pos="-0.06832 0.03225 0.06643" axis="0 0 1" range="-0.698 0.698" limited="true"/>
+                <geom name="finger1_base_geom" type="mesh" mesh="finger1_base" group="1" rgba="1 1 1 1"/>
+                <geom name="finger1_base_vis_geom" type="mesh" mesh="finger1_base_vis" group="0" contype="0" conaffinity="0"/>
+                <body name="finger1_bg" pos="0 0 0">
+                    <joint name="finger1_base_joint" type="hinge" pos="-0.06945 0.04928 0.00731" axis="0.0755057 -0.99714537 0" range="0 1.5708" limited="true"/>
+                    <geom name="finger1_bg_geom" type="mesh" mesh="finger1_bg" group="1" rgba="1 1 1 1"/>
+                    <geom name="finger1_bg_vis_geom" type="mesh" mesh="finger1_bg_vis" group="0" contype="0" conaffinity="0"/>
+                    <body name="finger1_grammar1" pos="0 0 0">
+                        <geom name="finger1_grammar1_geom" type="mesh" mesh="finger1_grammar1" group="1" rgba="1 1 1 1"/>
+                        <geom name="finger1_grammar1_vis_geom" type="mesh" mesh="finger1_grammar1_vis" group="0" contype="0" conaffinity="0"/>
+                        <body name="finger1_middle" pos="0 0 0">
+                            <geom name="finger1_middle_geom" type="mesh" mesh="finger1_middle" group="1" rgba="1 1 1 1"/>
+                            <geom name="finger1_middle_vis_geom" type="mesh" mesh="finger1_middle_vis" group="0" contype="0" conaffinity="0"/>
+                            <body name="finger1_mg" pos="0 0 0">
+                                <joint name="finger1_middle_joint" type="hinge" pos="-0.11093 0.01206 0.00464" axis="0.07552783 -0.99714369 0" range="0 1.5708" limited="true"/>
+                                <geom name="finger1_mg_geom" type="mesh" mesh="finger1_mg" group="1" rgba="1 1 1 1"/>
+                                <geom name="finger1_mg_vis_geom" type="mesh" mesh="finger1_mg_vis" group="0" contype="0" conaffinity="0"/>
+                                <body name="finger1_grammar2" pos="0 0 0">
+                                    <geom name="finger1_grammar2_geom" type="mesh" mesh="finger1_grammar2" group="1" rgba="1 1 1 1"/>
+                                    <geom name="finger1_grammar2_vis_geom" type="mesh" mesh="finger1_grammar2_vis" group="0" contype="0" conaffinity="0"/>
+                                    <body name="finger1_end" pos="0 0 0">
+                                        <geom name="finger1_end_geom" type="mesh" mesh="finger1_end" group="1" rgba="1 1 1 1"/>
+                                        <geom name="finger1_end_vis_geom" type="mesh" mesh="finger1_end_vis" group="0" contype="0" conaffinity="0"/>
+                                        <body name="finger1_eg" pos="0 0 0">
+                                            <joint name="finger1_end_joint" type="hinge" pos="-0.15752 0.04271 0.00154" axis="0.0755057 -0.99714537 0" range="0 1.5708" limited="true"/>
+                                            <geom name="finger1_eg" type="mesh" mesh="finger1_eg" group="1" rgba="1 1 1 1"/>
+                                            <geom name="finger1_eg_vis" type="mesh" mesh="finger1_eg_vis" group="0" contype="0" conaffinity="0"/>
+                                            <body name="finger1_tip" pos="0 0 0">
+                                                <geom class="tip" name="finger1_tip_geom" type="mesh" mesh="finger1_tip" group="1" rgba="1 1 1 1"/>
+                                                <geom name="finger1_tip_vis_geom" type="mesh" mesh="finger1_tip_vis" group="0" contype="0" conaffinity="0"/>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </body> 
+
+  </worldbody>
+
+  <actuator>
+    <position name="finger_palm_joint" class="servo" joint="finger1_palm_joint" forcerange="-0.8 0.8" inheritrange="1"/>
+    <position name="finger_base_joint" class="servo" joint="finger1_base_joint" forcerange="-0.8 0.8" inheritrange="1"/>
+    <position name="finger_middle_joint" class="servo" joint="finger1_middle_joint" forcerange="-0.80 0.80" inheritrange="1"/>
+    <position name="finger_end_joint" class="servo" joint="finger1_end_joint" forcerange="-0.3 0.3" inheritrange="1"/>
+  </actuator>
+</mujoco>

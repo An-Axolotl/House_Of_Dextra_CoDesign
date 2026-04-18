@@ -1,0 +1,10 @@
+pyproject.toml
+setup.py
+codesign/__init__.py
+codesign/ui_extension_example.py
+codesign.egg-info/PKG-INFO
+codesign.egg-info/SOURCES.txt
+codesign.egg-info/dependency_links.txt
+codesign.egg-info/not-zip-safe
+codesign.egg-info/requires.txt
+codesign.egg-info/top_level.txt

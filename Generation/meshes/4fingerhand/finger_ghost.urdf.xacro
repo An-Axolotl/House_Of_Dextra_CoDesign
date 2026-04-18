@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!--Auto-converted from finger_ghost.xml
+Grammar: grammar1=none, grammar2=none; counts: g1=0, g2=0
+Δg1=(0.0, 0.0, 0.0), Δg2=(0.0, 0.0, 0.0)
+Offsets: δ_middle=(0.0, 0.0, 0.0), δ_end=(0.0, 0.0, 0.0); flatten=False
+Ghost joints: base=True, middle=True, end=True-->
+  <xacro:macro name="finger_ghost" params="prefix parent *origin">
+    <link name="${prefix}finger_root">
+      <inertial>
+        <mass value="0.001"/>
+        <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}root_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${prefix}finger_root"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+    <link name="${prefix}finger_palm_servo">
+      <inertial>
+        <mass value="1e-09"/>
+        <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}palm_servo_joint" type="fixed">
+      <parent link="${prefix}finger_root"/>
+      <child link="${prefix}finger_palm_servo"/>
+      <origin xyz="0.00000 0.00000 0.00000" rpy="0 0 0"/>
+    </joint>
+    <link name="${prefix}finger_base">
+      <inertial>
+        <mass value="1e-09"/>
+        <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}finger_palm_joint" type="revolute">
+      <parent link="${prefix}finger_palm_servo"/>
+      <child link="${prefix}finger_base"/>
+      <origin xyz="0.01863 0.06172 -0.02800" rpy="0 0 0"/>
+      <axis xyz="0.00000 0.00000 1.00000"/>
+      <limit lower="0.0" upper="1e-08" effort="10" velocity="1.0"/>
+      <dynamics damping="1.0"/>
+    </joint>
+    <link name="${prefix}finger_base_lever">
+      <inertial>
+        <mass value="1e-09"/>
+        <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}finger_base_joint" type="revolute">
+      <parent link="${prefix}finger_base"/>
+      <child link="${prefix}finger_base_lever"/>
+      <origin xyz="0.01709 0.00043 -0.00464" rpy="0 0 0"/>
+      <axis xyz="-0.99942 -0.03408 0.00000"/>
+      <limit lower="-0.001" upper="0.001" effort="10" velocity="1.0"/>
+      <dynamics damping="10.0" friction="1.0"/>
+    </joint>
+    <link name="${prefix}finger_middle">
+      <inertial>
+        <mass value="1e-09"/>
+        <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}middle_joint" type="fixed">
+      <parent link="${prefix}finger_base_lever"/>
+      <child link="${prefix}finger_middle"/>
+      <origin xyz="0.00000 0.00000 0.00000" rpy="0 0 0"/>
+    </joint>
+    <link name="${prefix}finger_middle_lever">
+      <inertial>
+        <mass value="1e-09"/>
+        <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}finger_middle_joint" type="revolute">
+      <parent link="${prefix}finger_middle"/>
+      <child link="${prefix}finger_middle_lever"/>
+      <origin xyz="-0.00115 0.03147 -0.00114" rpy="0 0 0"/>
+      <axis xyz="-0.99942 -0.03408 0.00000"/>
+      <limit lower="-0.001" upper="0.001" effort="10" velocity="1.0"/>
+      <dynamics damping="10.0" friction="1.0"/>
+    </joint>
+    <link name="${prefix}finger_end">
+      <inertial>
+        <mass value="1e-09"/>
+        <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}end_joint" type="fixed">
+      <parent link="${prefix}finger_middle_lever"/>
+      <child link="${prefix}finger_end"/>
+      <origin xyz="0.00000 0.00000 0.00000" rpy="0 0 0"/>
+    </joint>
+    <link name="${prefix}finger_end_lever">
+      <inertial>
+        <mass value="1e-09"/>
+        <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}finger_end_joint" type="revolute">
+      <parent link="${prefix}finger_end"/>
+      <child link="${prefix}finger_end_lever"/>
+      <origin xyz="-0.00104 0.03148 -0.00100" rpy="0 0 0"/>
+      <axis xyz="-0.99942 -0.03409 0.00000"/>
+      <limit lower="-0.001" upper="0.001" effort="10" velocity="1.0"/>
+      <dynamics damping="10.0" friction="1.0"/>
+    </joint>
+    <link name="${prefix}finger_tip">
+      <inertial>
+        <mass value="1e-09"/>
+        <inertia ixx="1e-12" ixy="0" ixz="0" iyy="1e-12" iyz="0" izz="1e-12"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}tip_joint" type="fixed">
+      <parent link="${prefix}finger_end_lever"/>
+      <child link="${prefix}finger_tip"/>
+      <origin xyz="0.00000 0.00000 0.00000" rpy="0 0 0"/>
+    </joint>
+  </xacro:macro>
+</robot>

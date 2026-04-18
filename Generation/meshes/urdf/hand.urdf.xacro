@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="robotic_hand" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!--
+    Multi-finger robotic hand generated from MuJoCo model.
+    Source: meshes/lego_hand/hand.xml
+    Finger models found: ['finger_model_1', 'finger_model_2', 'finger_model_3', 'finger_model_4', 'finger_model_5']
+    Finger attachments: 5
+    -->
+<xacro:include filename="finger1_2servo_3stacked.urdf.xacro" />
+  <!-- Used by: f1_, f2_, f3_, f4_, f5_ -->
+<link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.5" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="palm">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/visual/palm_vis.obj" />
+      </geometry>
+    </visual>
+    <collision name="palm_collision_0">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part0.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_1">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part1.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_2">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part2.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_3">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part3.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_4">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part4.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_5">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part5.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_6">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part6.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_7">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part7.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_8">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part8.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_9">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part9.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_10">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part10.obj" />
+      </geometry>
+    </collision>
+    <collision name="palm_collision_11">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="robot_meshes/palm_part11.obj" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.2" />
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+    </inertial>
+  </link>
+  <joint name="base_to_palm" type="fixed">
+    <parent link="base_link" />
+    <child link="palm" />
+    <origin xyz="0.0 0.0 0.5" rpy="3.14159 0.00000 0.00000" />
+  </joint>
+  <!-- f1_ (finger_model_1 -> finger1) -->
+<xacro:finger1 prefix="f1_" parent="palm">
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.0000 0.0000 0.0000" />
+  </xacro:finger1>
+  <!-- f2_ (finger_model_2 -> finger1) - quat(0.961255, 0.000000, 0.000000, -0.275660) = rpy(0.0000, 0.0000, -0.5586) -->
+<xacro:finger1 prefix="f2_" parent="palm">
+    <origin xyz="0.023811 0.025036 0.000000" rpy="0.0000 0.0000 -0.5586" />
+  </xacro:finger1>
+  <!-- f3_ (finger_model_3 -> finger1) - quat(0.763781, 0.000000, 0.000000, -0.645475) = rpy(0.0000, 0.0000, -1.4033) -->
+<xacro:finger1 prefix="f3_" parent="palm">
+    <origin xyz="0.042166 0.030240 0.000000" rpy="0.0000 0.0000 -1.4033" />
+  </xacro:finger1>
+  <!-- f4_ (finger_model_4 -> finger1) - quat(0.578885, 0.000000, 0.000000, -0.815409) = rpy(0.0000, 0.0000, -1.9069) -->
+<xacro:finger1 prefix="f4_" parent="palm">
+    <origin xyz="0.051952 0.009645 0.000000" rpy="0.0000 0.0000 -1.9069" />
+  </xacro:finger1>
+  <!-- f5_ (finger_model_5 -> finger1) - quat(0.240329, 0.000000, 0.000000, -0.970691) = rpy(0.0000, 0.0000, -2.6562) -->
+<xacro:finger1 prefix="f5_" parent="palm">
+    <origin xyz="0.059447 -0.006788 0.000000" rpy="0.0000 0.0000 -2.6562" />
+  </xacro:finger1>
+</robot>

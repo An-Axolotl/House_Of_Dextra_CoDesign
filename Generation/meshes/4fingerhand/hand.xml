@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="hand_scene">
+  <compiler angle="radian" meshdir="./" inertiagrouprange="1 1" />
+  <option integrator="implicitfast" cone="elliptic" impratio="100" timestep="0.002">
+    <flag warmstart="enable" nativeccd="enable" multiccd="enable" />
+  </option>
+  <asset>
+    <!-- visual -->
+    <mesh name="palm_vis" file="robot_meshes/visual/palm_vis.obj"/>
+
+    <!-- collisions -->
+    <mesh name="palm_part0" file="robot_meshes/palm_part0.obj"/>
+
+    <model name="finger_model_1" file="finger1.xml" />
+    <model name="finger_model_2" file="finger1.xml" />
+    <model name="finger_model_3" file="finger1.xml" />
+    <model name="finger_model_4" file="finger1.xml" />
+    <model name="finger_model_5" file="finger_ghost.xml" />
+    <texture name="grid" type="2d" builtin="checker" rgb1=".1 .2 .3" rgb2=".2 .3 .4" width="300" height="300" mark="none" />
+    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2" />
+  </asset>
+  <default>
+    <geom solimp="0.999 0.999 0.001 0.0001 1" solref="0.0001 1" friction=".2" condim="6" margin="0.002" />
+    <joint damping="0.03" frictionloss="0.001" armature="0.0015" />
+  </default>
+  <visual>
+    <global azimuth="120" elevation="-20" />
+  </visual>
+  <worldbody>
+    <light name="main_light" pos="0 0 4" dir="0 0 -1" diffuse="1 1 1" specular="0.5 0.5 0.5" />
+    <geom name="floor" type="plane" pos="0 0 0" size="10 10 0.1" material="grid" />
+    <body name="hand" pos="0 0 0.5" euler="3.1415926 0 0">
+      <body name="palm">
+        <geom name="palm_geom_0" type="mesh" mesh="palm_part0" group="1" rgba="1 1 1 1" />
+        <geom name="palm_vis_geom" type="mesh" mesh="palm_vis" group="0" contype="0" conaffinity="0" />
+      </body>
+      <frame pos="0 0 0">
+        <attach model="finger_model_1" body="finger_root" prefix="f1_" />
+      </frame>
+      <frame pos="0.007864 -0.005870 0.000640" quat="0.683814 0.000000 0.000000 -0.729656">
+          <attach model="finger_model_2" body="finger_root" prefix="f2_"/>
+      </frame>
+      <frame pos="-0.005349 -0.005679 0.000640" quat="0.013905 0.000000 0.000000 0.999903">
+          <attach model="finger_model_3" body="finger_root" prefix="f3_"/>
+      </frame>
+      <frame pos="-0.001870 0.000045 0.000640" quat="0.697292 0.000000 0.000000 0.716787">
+          <attach model="finger_model_4" body="finger_root" prefix="f4_"/>
+      </frame>
+      <frame pos="0 0 0" quat="1 0 0 0">
+        <attach model="finger_model_5" body="finger_root" prefix="f5_"/>
+      </frame>
+    </body>
+    <camera name="fixed" pos="0 -3 2" xyaxes="1 0 0 0 1 2" />
+  </worldbody>
+</mujoco>
